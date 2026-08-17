@@ -1,0 +1,2985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pratham Kashyap — AI Systems Engineer &amp; Software Architect</title>
+<meta name="description" content="Portfolio of Pratham Kashyap — AI Systems Engineer & Software Architect building applied AI pipelines, computer vision models, and production backend services."/>
+<meta name="theme-color" content="#03040A"/>
+<meta property="og:title" content="Pratham Kashyap — AI Systems Engineer"/>
+<meta property="og:description" content="Applied AI, Computer Vision, and Backend Engineering — From Notebook to Product."/>
+<meta property="og:type" content="website"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%2303040A' stroke='%234FE0FF' stroke-width='4'/%3E%3Ctext x='50' y='60' text-anchor='middle' font-family='monospace' font-size='32' font-weight='bold' fill='%234FE0FF'%3EPK%3C/text%3E%3C/svg%3E"/>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+
+<!-- Three.js for 3D Interactive Celestial Singularity & Cosmos -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<style>
+/* ============================================================
+   DESIGN TOKENS — HARMONIZED TWILIGHT & CELESTIAL PALETTE
+   ============================================================ */
+:root {
+  --void: #03040A;
+  --void-elevated: #060A18;
+  --void-card: #090F24;
+  --void-card-hover: #0E1635;
+  
+  --line: rgba(79, 224, 255, 0.12);
+  --line-bright: rgba(79, 224, 255, 0.32);
+  --line-purple: rgba(168, 85, 247, 0.28);
+  
+  --starlight: #FBFDFF;
+  --mist: #C8E6FF;
+  --mist-dim: #818EA8;
+  
+  --electric-cyan: #4FE0FF;
+  --deep-blue: #2F6BFF;
+  --ice-blue: #93E9FF;
+  --twilight-violet: #8B5CF6;
+  --blade-purple: #A855F7;
+  --amber: #E0A458;
+  --emerald: #34D399;
+  
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', var(--font-sans);
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-full: 9999px;
+  
+  --shadow-glow: 0 0 50px rgba(47, 107, 255, 0.22);
+  --shadow-cyan: 0 0 35px rgba(79, 224, 255, 0.3);
+  --shadow-purple: 0 0 35px rgba(168, 85, 247, 0.3);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--void);
+  color: var(--starlight);
+  line-height: 1.65;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   AMBIENT 3D WEBGL CELESTIAL SINGULARITY BACKGROUND
+   ============================================================ */
+#ambientBgCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Floating CSS Cyber Nodes & Blobs Background Layer — GPU Accelerated */
+.floating-cyber-dust {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  contain: strict;
+  transform: translate3d(0, 0, 0);
+}
+.cyber-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(28px);
+  opacity: 0.28;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  animation: floatDrift 8s infinite alternate ease-in-out;
+}
+.cyber-blob--1 {
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.45) 0%, rgba(168, 85, 247, 0.15) 50%, transparent 70%);
+  top: 10%;
+  left: 5%;
+  animation-duration: 9s;
+}
+.cyber-blob--2 {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(79, 224, 255, 0.45) 0%, rgba(79, 224, 255, 0.15) 50%, transparent 70%);
+  bottom: 15%;
+  right: 5%;
+  animation-duration: 11s;
+  animation-delay: -3s;
+}
+.cyber-blob--3 {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(47, 107, 255, 0.45) 0%, rgba(47, 107, 255, 0.15) 50%, transparent 70%);
+  top: 55%;
+  left: 45%;
+  animation-duration: 7s;
+  animation-delay: -4s;
+}
+.cyber-blob--4 {
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(79, 224, 255, 0.35) 0%, transparent 70%);
+  top: 35%;
+  right: 20%;
+  animation-duration: 10s;
+  animation-delay: -2s;
+}
+.cyber-blob--5 {
+  width: 190px;
+  height: 190px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, transparent 70%);
+  bottom: 40%;
+  left: 25%;
+  animation-duration: 8s;
+  animation-delay: -6s;
+}
+
+/* Floating Cyber Particles / Geometries */
+.cyber-square {
+  position: absolute;
+  border: 1px solid rgba(79, 224, 255, 0.28);
+  box-shadow: 0 0 10px rgba(79, 224, 255, 0.22);
+  border-radius: 4px;
+  opacity: 0.35;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  animation: squareSpin 10s infinite linear;
+}
+.cyber-square--purple {
+  border-color: rgba(168, 85, 247, 0.35);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.28);
+}
+.cyber-square--ice {
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.28);
+}
+
+/* Canvas particle layer */
+#particleCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  contain: strict;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes floatDrift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  33%  { transform: translate3d(45px, -60px, 0) scale(1.12); }
+  66%  { transform: translate3d(-35px, 40px, 0) scale(0.95); }
+  100% { transform: translate3d(25px, -25px, 0) scale(1.04); }
+}
+@keyframes squareSpin {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0.12; }
+  30%  { opacity: 0.45; }
+  70%  { opacity: 0.38; }
+  100% { transform: translate3d(0, -320px, 0) rotate(360deg); opacity: 0.1; }
+}
+
+/* ============================================================
+   ATTRACTIVE CUSTOM SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--void);
+  border-left: 1px solid var(--line);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--deep-blue) 0%, var(--electric-cyan) 50%, var(--blade-purple) 100%);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--void);
+  box-shadow: inset 0 0 8px rgba(79, 224, 255, 0.8);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--electric-cyan) 0%, var(--blade-purple) 100%);
+  box-shadow: 0 0 16px var(--electric-cyan);
+}
+
+/* ============================================================
+   SIDE HUD RADAR / SCROLL TRACKER
+   ============================================================ */
+.side-hud {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.3rem;
+  pointer-events: auto;
+}
+.side-hud__track {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--line);
+  z-index: 1;
+}
+.side-hud__progress {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--electric-cyan), var(--blade-purple));
+  box-shadow: 0 0 12px var(--electric-cyan);
+  height: 0%;
+  z-index: 2;
+  transition: height 0.1s linear;
+}
+.side-hud__node {
+  position: relative;
+  z-index: 3;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--void);
+  border: 2px solid var(--mist-dim);
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.side-hud__node::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: transparent;
+  transition: all 0.3s var(--ease);
+}
+.side-hud__node:hover, .side-hud__node.active {
+  border-color: var(--electric-cyan);
+  box-shadow: 0 0 14px var(--electric-cyan), 0 0 24px rgba(168, 85, 247, 0.6);
+  transform: scale(1.35);
+}
+.side-hud__node.active::after {
+  background: var(--electric-cyan);
+}
+.side-hud__label {
+  position: absolute;
+  right: 24px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--electric-cyan);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+  transition: all 0.25s var(--ease);
+  background: rgba(7, 11, 26, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 0.25rem 0.65rem;
+  border-radius: 5px;
+  border: 1px solid var(--line-bright);
+}
+.side-hud__node:hover .side-hud__label {
+  opacity: 1;
+  transform: translateX(0);
+}
+@media (max-width: 1024px) {
+  .side-hud { display: none; }
+}
+
+/* ============================================================
+   CUSTOM ANIME CURSOR & TRAIL
+   ============================================================ */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--electric-cyan);
+  box-shadow: 0 0 18px rgba(79, 224, 255, 0.6);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s var(--ease), height 0.2s var(--ease), border-color 0.2s, background 0.2s;
+  mix-blend-mode: screen;
+}
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #FFF;
+  box-shadow: 0 0 10px #FFF, 0 0 20px var(--electric-cyan);
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+}
+.custom-cursor.hovering {
+  width: 50px;
+  height: 50px;
+  border-color: var(--blade-purple);
+  background: rgba(168, 85, 247, 0.15);
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.7);
+}
+#slashCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* ============================================================
+   CONTAINER & CORE TYPOGRAPHY
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  padding: 6.5rem 0;
+  position: relative;
+}
+
+.section-head {
+  margin-bottom: 3.8rem;
+}
+.section-head__kicker {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--electric-cyan);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-head__kicker::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blade-purple), var(--electric-cyan));
+  box-shadow: 0 0 10px var(--electric-cyan);
+}
+.section-head__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+.section-head__desc {
+  color: var(--mist);
+  font-size: 1.08rem;
+  max-width: 65ch;
+  margin-top: 0.85rem;
+}
+
+.accent-gradient {
+  background: linear-gradient(135deg, var(--starlight) 0%, var(--electric-cyan) 50%, var(--blade-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Cyber Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.88rem 1.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+}
+.btn--primary {
+  background: linear-gradient(135deg, var(--deep-blue) 0%, #1A4ED8 60%, var(--blade-purple) 100%);
+  color: var(--starlight);
+  border-color: rgba(79, 224, 255, 0.4);
+  box-shadow: 0 0 25px rgba(47, 107, 255, 0.35);
+}
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(79, 224, 255, 0.6), 0 0 20px rgba(168, 85, 247, 0.4);
+  border-color: var(--electric-cyan);
+}
+.btn--ghost {
+  background: rgba(10, 16, 36, 0.7);
+  backdrop-filter: blur(12px);
+  color: var(--starlight);
+  border-color: var(--line);
+}
+.btn--ghost:hover {
+  background: var(--void-card-hover);
+  border-color: var(--electric-cyan);
+  color: var(--electric-cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(79, 224, 255, 0.3);
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.3rem 0;
+  transition: all 0.35s var(--ease);
+}
+.navbar.scrolled {
+  padding: 0.8rem 0;
+  background: rgba(3, 4, 10, 0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+}
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--starlight);
+  text-decoration: none;
+}
+.navbar__logo-gem {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--deep-blue), var(--blade-purple));
+  border: 1px solid var(--electric-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--starlight);
+  font-weight: 900;
+  font-size: 0.9rem;
+  box-shadow: 0 0 18px rgba(79, 224, 255, 0.35);
+  transition: all 0.3s var(--ease);
+}
+.navbar__brand:hover .navbar__logo-gem {
+  transform: rotate(8deg) scale(1.08);
+  box-shadow: 0 0 25px var(--electric-cyan);
+}
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  list-style: none;
+}
+.navbar__link {
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  color: var(--mist-dim);
+  padding: 0.5rem 0.95rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all 0.25s var(--ease);
+}
+.navbar__link:hover, .navbar__link.active {
+  color: var(--electric-cyan);
+  background: rgba(79, 224, 255, 0.08);
+}
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.sfx-toggle {
+  background: rgba(10, 16, 36, 0.8);
+  border: 1px solid var(--line-bright);
+  color: var(--electric-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.25s var(--ease);
+}
+.sfx-toggle:hover {
+  background: rgba(79, 224, 255, 0.15);
+  box-shadow: 0 0 15px rgba(79, 224, 255, 0.3);
+}
+
+/* ============================================================
+   HERO SECTION — PROPORTIONED 2-COLUMN LAYOUT
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 8rem 0 5rem;
+}
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+  width: 100%;
+}
+.hero__kicker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.45rem 1.15rem;
+  border-radius: var(--radius-full);
+  background: rgba(47, 107, 255, 0.14);
+  border: 1px solid rgba(79, 224, 255, 0.35);
+  box-shadow: 0 0 22px rgba(79, 224, 255, 0.15);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--electric-cyan);
+  margin-bottom: 1.5rem;
+}
+.hero__pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 10px var(--emerald);
+  animation: bladePulse 2s infinite;
+}
+@keyframes bladePulse {
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 14px var(--emerald); }
+  50% { opacity: 0.4; transform: scale(0.8); box-shadow: 0 0 4px var(--emerald); }
+}
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 4.8vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  margin-bottom: 1.5rem;
+}
+.hero__body {
+  font-size: 1.12rem;
+  color: var(--mist);
+  max-width: 52ch;
+  margin-bottom: 2.2rem;
+  line-height: 1.75;
+}
+.hero__actions {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+/* Full-Sized Professional Code Terminal */
+.hero-glass-terminal {
+  background: rgba(7, 11, 26, 0.92);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--line-bright);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), var(--shadow-glow);
+  overflow: hidden;
+  transition: border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+.hero-glass-terminal:hover {
+  border-color: var(--electric-cyan);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.75), var(--shadow-cyan);
+}
+.terminal-header {
+  background: rgba(10, 16, 36, 0.95);
+  padding: 0.95rem 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+.terminal-dots {
+  display: flex;
+  gap: 7px;
+}
+.terminal-dots span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.terminal-dots span:nth-child(1) { background: #FF5F56; }
+.terminal-dots span:nth-child(2) { background: #FFBD2E; }
+.terminal-dots span:nth-child(3) { background: #27C93F; }
+.terminal-title {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--mist-dim);
+}
+.terminal-body {
+  padding: 2rem 2.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--mist);
+  line-height: 1.9;
+}
+.terminal-line {
+  margin-bottom: 0.5rem;
+}
+.terminal-prompt {
+  color: var(--electric-cyan);
+  font-weight: 700;
+}
+.terminal-cmd {
+  color: var(--starlight);
+}
+.terminal-out {
+  color: var(--mist-dim);
+  padding-left: 1.2rem;
+}
+.terminal-tag {
+  display: inline-block;
+  background: rgba(79, 224, 255, 0.1);
+  color: var(--electric-cyan);
+  border: 1px solid rgba(79, 224, 255, 0.25);
+  padding: 0.2em 0.7em;
+  border-radius: 5px;
+  margin: 0.3rem 0.3rem 0.3rem 0;
+  font-size: 0.78rem;
+}
+
+/* ============================================================
+   3D CARD TILT ON HOVER WITH LIGHT GLARE
+   ============================================================ */
+.tilt-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  transition: transform 0.2s ease-out, border-color 0.3s, box-shadow 0.3s;
+}
+.tilt-card .card-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(79, 224, 255, 0.18) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+  z-index: 10;
+}
+.tilt-card:hover .card-glare {
+  opacity: 1;
+}
+
+/* ============================================================
+   BUILD MATRIX (PHILOSOPHY / STRENGTHS)
+   ============================================================ */
+.build-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.8rem;
+}
+.build-card {
+  background: var(--void-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 2.2rem;
+  position: relative;
+  overflow: hidden;
+}
+.build-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--electric-cyan), var(--blade-purple), transparent);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+.build-card:hover {
+  border-color: var(--line-bright);
+  background: var(--void-card);
+  box-shadow: var(--shadow-glow);
+}
+.build-card:hover::before {
+  opacity: 1;
+}
+.build-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: rgba(47, 107, 255, 0.16);
+  border: 1px solid rgba(79, 224, 255, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--electric-cyan);
+  margin-bottom: 1.4rem;
+  box-shadow: 0 0 15px rgba(79, 224, 255, 0.18);
+}
+.build-card__badge {
+  position: absolute;
+  top: 1.8rem;
+  right: 1.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: rgba(139, 92, 246, 0.12);
+  color: var(--blade-purple);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+.build-card__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+.build-card__desc {
+  color: var(--mist-dim);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* ============================================================
+   FEATURED PROJECTS SECTION WITH 3D TILT
+   ============================================================ */
+.projects-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.project-card {
+  background: var(--void-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(2rem, 4vw, 3.2rem);
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.project-card:hover {
+  border-color: var(--line-bright);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), var(--shadow-glow);
+}
+.project-card__num {
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  color: var(--electric-cyan);
+  margin-bottom: 0.85rem;
+  letter-spacing: 0.12em;
+}
+.project-card__title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.9rem;
+  letter-spacing: -0.02em;
+}
+.project-card__summary {
+  font-size: 1.05rem;
+  color: var(--mist);
+  margin-bottom: 1.3rem;
+  line-height: 1.7;
+}
+.project-card__details {
+  color: var(--mist-dim);
+  font-size: 0.94rem;
+  margin-bottom: 1.8rem;
+  line-height: 1.7;
+}
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 2rem;
+}
+.project-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background: var(--void-card);
+  border: 1px solid var(--line);
+  color: var(--mist);
+  transition: all 0.2s var(--ease);
+}
+.project-tag:hover {
+  border-color: var(--electric-cyan);
+  color: var(--electric-cyan);
+  box-shadow: 0 0 10px rgba(79, 224, 255, 0.2);
+}
+.project-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--electric-cyan);
+  text-decoration: none;
+  transition: all 0.25s var(--ease);
+}
+.project-card__link:hover {
+  color: var(--starlight);
+  gap: 1rem;
+}
+
+/* Metrics Box — Indented & Aligned */
+.project-card__visual {
+  background: var(--void);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  justify-content: center;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6);
+}
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(79, 224, 255, 0.08);
+}
+.metric-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--mist-dim);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.metric-val {
+  font-family: var(--font-mono);
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--electric-cyan);
+  text-align: right;
+  line-height: 1.4;
+}
+
+/* ============================================================
+   ATTRACTIVE & DISTINCTIVE CELESTIAL TECHNOLOGY CONSTELLATIONS
+   ============================================================ */
+.constellation-wrapper {
+  background: radial-gradient(circle at 50% 50%, rgba(79, 224, 255, 0.04) 0%, transparent 70%);
+  border: none;
+  padding: 1.5rem 0;
+  position: relative;
+  overflow: visible;
+}
+#constellationSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.constellation-cluster {
+  cursor: pointer;
+}
+.cluster-title {
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  fill: var(--electric-cyan);
+  text-anchor: middle;
+  transition: fill 0.3s, filter 0.3s;
+}
+.cluster-link {
+  stroke-dasharray: 4 4;
+  transition: all 0.35s var(--ease);
+}
+.constellation-node {
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+}
+.node-circle {
+  transition: all 0.3s var(--ease);
+}
+.node-label {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  fill: var(--mist);
+  pointer-events: none;
+  transition: fill 0.25s var(--ease), font-weight 0.25s;
+}
+.constellation-cluster:hover .cluster-title {
+  fill: #FFF;
+  filter: drop-shadow(0 0 10px var(--electric-cyan));
+}
+.constellation-cluster:hover .cluster-link {
+  stroke-dasharray: 0;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 10px var(--electric-cyan));
+}
+.constellation-node:hover .node-circle {
+  r: 7;
+  fill: #FFF;
+  filter: drop-shadow(0 0 16px var(--electric-cyan));
+}
+.constellation-node:hover .node-label {
+  fill: #FFF;
+  font-weight: 700;
+}
+
+/* ============================================================
+   UNIFIED STACK CATEGORY CARDS (HARMONIZED OBSIDIAN PALETTE)
+   ============================================================ */
+.stack-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.8rem;
+  margin-top: 3rem;
+}
+.stack-category {
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s var(--ease);
+  background: var(--void-card);
+  border: 1px solid var(--line);
+}
+.stack-category::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--deep-blue), var(--electric-cyan));
+  opacity: 0.4;
+  transition: opacity 0.3s var(--ease);
+}
+.stack-category:hover {
+  border-color: var(--line-bright);
+  box-shadow: 0 15px 40px rgba(47, 107, 255, 0.25);
+  transform: translateY(-4px);
+  background: var(--void-card-hover);
+}
+.stack-category:hover::before {
+  opacity: 1;
+}
+.stack-category__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.4rem;
+}
+.stack-category__title {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--electric-cyan);
+}
+.stack-category__icon-svg {
+  width: 22px;
+  height: 22px;
+  color: var(--electric-cyan);
+  opacity: 0.85;
+}
+.stack-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.stack-pill {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  background: rgba(3, 4, 10, 0.7);
+  border: 1px solid var(--line);
+  color: var(--mist);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.25s var(--ease);
+}
+.stack-pill:hover {
+  border-color: var(--electric-cyan);
+  color: var(--electric-cyan);
+  box-shadow: 0 0 12px rgba(79, 224, 255, 0.3);
+}
+
+/* ============================================================
+   APPLIED ML & EMPIRICAL SIGNALS — ARCHITECTURAL TELEMETRY STREAM
+   ============================================================ */
+.signals-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.signal-entry {
+  background: var(--void-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 2rem 2.4rem;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  position: relative;
+  transition: all 0.35s var(--ease);
+}
+.signal-entry::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 3px;
+  background: var(--electric-cyan);
+  border-radius: 0 3px 3px 0;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+  box-shadow: 0 0 12px var(--electric-cyan);
+}
+.signal-entry:hover {
+  border-color: var(--line-bright);
+  background: var(--void-card);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5), var(--shadow-glow);
+  transform: translateX(4px);
+}
+.signal-entry:hover::before {
+  opacity: 1;
+}
+.signal-entry__telemetry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  border-right: 1px solid rgba(79, 224, 255, 0.1);
+  padding-right: 1.5rem;
+}
+.signal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+.signal-badge--cyan {
+  color: var(--electric-cyan);
+  background: rgba(79, 224, 255, 0.08);
+  border: 1px solid rgba(79, 224, 255, 0.25);
+}
+.signal-badge--cyan .signal-indicator {
+  background: var(--electric-cyan);
+  box-shadow: 0 0 8px var(--electric-cyan);
+}
+.signal-badge--violet {
+  color: var(--blade-purple);
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+.signal-badge--violet .signal-indicator {
+  background: var(--blade-purple);
+  box-shadow: 0 0 8px var(--blade-purple);
+}
+.signal-badge--sky {
+  color: var(--ice-blue);
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+.signal-badge--sky .signal-indicator {
+  background: var(--ice-blue);
+  box-shadow: 0 0 8px var(--ice-blue);
+}
+.signal-badge--emerald {
+  color: var(--emerald);
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+.signal-badge--emerald .signal-indicator {
+  background: var(--emerald);
+  box-shadow: 0 0 8px var(--emerald);
+}
+.signal-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.signal-metric {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--starlight);
+  letter-spacing: -0.02em;
+}
+.signal-meta {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--mist-dim);
+}
+.signal-entry__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.signal-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--starlight);
+  letter-spacing: -0.01em;
+}
+.signal-body {
+  color: var(--mist-dim);
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+.signal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+.signal-tag {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--electric-cyan);
+  background: rgba(79, 224, 255, 0.06);
+  border: 1px solid rgba(79, 224, 255, 0.18);
+  padding: 0.2em 0.65em;
+  border-radius: 4px;
+}
+
+@media (max-width: 860px) {
+  .signal-entry {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    padding: 1.8rem;
+  }
+  .signal-entry__telemetry {
+    border-right: none;
+    border-bottom: 1px solid rgba(79, 224, 255, 0.1);
+    padding-right: 0;
+    padding-bottom: 1rem;
+  }
+}
+
+/* ============================================================
+   SPACE ARCADE MINI-GAME
+   ============================================================ */
+.arcade-container {
+  background: var(--void-elevated);
+  border: 1px solid var(--line-bright);
+  border-radius: var(--radius-lg);
+  padding: 2.8rem;
+  text-align: center;
+  box-shadow: var(--shadow-glow);
+  position: relative;
+  overflow: hidden;
+}
+.arcade-viewport {
+  position: relative;
+  border: 1px solid var(--line-bright);
+  border-radius: var(--radius-md);
+  background: #020306;
+  margin: 1.8rem auto 0;
+  max-width: 760px;
+  overflow: hidden;
+}
+#arcadeCanvas {
+  display: block;
+  width: 100%;
+  height: 400px;
+  touch-action: none;
+}
+.arcade-hud {
+  position: absolute;
+  top: 1rem;
+  left: 1.2rem;
+  right: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--mist);
+  pointer-events: none;
+  z-index: 5;
+}
+.arcade-hud b {
+  color: var(--electric-cyan);
+}
+.arcade-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 4, 10, 0.9);
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  z-index: 10;
+  gap: 1.2rem;
+  transition: opacity 0.3s var(--ease);
+}
+.arcade-overlay.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.arcade-overlay h4 {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 700;
+}
+.arcade-overlay p {
+  color: var(--mist-dim);
+  font-size: 0.92rem;
+  max-width: 34ch;
+}
+.arcade-keys-hint {
+  display: flex;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--mist-dim);
+}
+.arcade-keys-hint kbd {
+  background: var(--void-card);
+  border: 1px solid var(--line);
+  padding: 0.25em 0.7em;
+  border-radius: 4px;
+  color: var(--electric-cyan);
+}
+
+/* ============================================================
+   CONTACT & FOOTER
+   ============================================================ */
+.contact-card {
+  background: linear-gradient(135deg, rgba(10, 16, 36, 0.95) 0%, rgba(3, 4, 10, 0.98) 100%);
+  border: 1px solid var(--line-bright);
+  border-radius: var(--radius-lg);
+  padding: clamp(2.5rem, 6vw, 5rem);
+  text-align: center;
+  box-shadow: var(--shadow-glow);
+}
+.contact-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.02em;
+}
+.contact-card__desc {
+  color: var(--mist);
+  font-size: 1.15rem;
+  max-width: 52ch;
+  margin: 0 auto 2.8rem;
+}
+.contact-card__buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.copy-badge {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--emerald);
+  height: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+.copy-badge.visible {
+  opacity: 1;
+}
+
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 2.8rem 0;
+  margin-top: 6rem;
+}
+.footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+.footer__tagline {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--mist-dim);
+}
+.footer__socials {
+  display: flex;
+  gap: 1.4rem;
+}
+.footer__social-link {
+  color: var(--mist-dim);
+  font-size: 1.2rem;
+  transition: all 0.25s var(--ease);
+}
+.footer__social-link:hover {
+  color: var(--electric-cyan);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .project-card {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .navbar__links {
+    display: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Ambient 3D Three.js Cosmic Singularity & Accretion Nebula -->
+<canvas id="ambientBgCanvas"></canvas>
+
+<!-- Floating Cyber Dust & Purple/Cyan Energy Blobs -->
+<div class="floating-cyber-dust">
+  <div class="cyber-blob cyber-blob--1"></div>
+  <div class="cyber-blob cyber-blob--2"></div>
+  <div class="cyber-blob cyber-blob--3"></div>
+  <div class="cyber-blob cyber-blob--4"></div>
+  <div class="cyber-blob cyber-blob--5"></div>
+  <!-- Cyan Squares -->
+  <div class="cyber-square" style="top: 20%; left: 85%; width: 28px; height: 28px; animation-duration: 8s;"></div>
+  <div class="cyber-square" style="top: 45%; left: 8%; width: 18px; height: 18px; animation-duration: 6s; animation-delay: -2s;"></div>
+  <div class="cyber-square" style="top: 80%; left: 75%; width: 22px; height: 22px; animation-duration: 7s; animation-delay: -1s;"></div>
+  <div class="cyber-square" style="top: 10%; left: 55%; width: 14px; height: 14px; animation-duration: 9s; animation-delay: -4s;"></div>
+  <div class="cyber-square" style="top: 70%; left: 40%; width: 32px; height: 32px; animation-duration: 11s; animation-delay: -5s;"></div>
+  <!-- Purple Squares -->
+  <div class="cyber-square cyber-square--purple" style="top: 65%; left: 12%; width: 36px; height: 36px; animation-duration: 9s;"></div>
+  <div class="cyber-square cyber-square--purple" style="top: 30%; left: 70%; width: 20px; height: 20px; animation-duration: 7s; animation-delay: -3s;"></div>
+  <div class="cyber-square cyber-square--purple" style="top: 88%; left: 30%; width: 16px; height: 16px; animation-duration: 8s; animation-delay: -6s;"></div>
+  <div class="cyber-square cyber-square--purple" style="top: 5%;  left: 22%; width: 24px; height: 24px; animation-duration: 10s; animation-delay: -1s;"></div>
+  <!-- Ice Blue Squares -->
+  <div class="cyber-square cyber-square--ice" style="top: 55%; left: 92%; width: 18px; height: 18px; animation-duration: 6s; animation-delay: -2s;"></div>
+  <div class="cyber-square cyber-square--ice" style="top: 15%; left: 35%; width: 26px; height: 26px; animation-duration: 12s; animation-delay: -7s;"></div>
+  <div class="cyber-square cyber-square--ice" style="top: 75%; left: 58%; width: 14px; height: 14px; animation-duration: 7s; animation-delay: -4s;"></div>
+</div>
+<!-- Canvas Particle Field -->
+<canvas id="particleCanvas"></canvas>
+
+<!-- Custom Anime Blade Cursor & Slash Trail -->
+<div class="custom-cursor" id="cursor"></div>
+<div class="custom-cursor-dot" id="cursorDot"></div>
+<canvas id="slashCanvas"></canvas>
+
+<!-- Side HUD Radar / Scroll Progress Tracker -->
+<nav class="side-hud" id="sideHud" aria-label="Section Tracker">
+  <div class="side-hud__track"></div>
+  <div class="side-hud__progress" id="hudProgress"></div>
+  
+  <a href="#home" class="side-hud__node active" data-section="home">
+    <span class="side-hud__label">01 // Hero</span>
+  </a>
+  <a href="#about" class="side-hud__node" data-section="about">
+    <span class="side-hud__label">02 // Philosophy</span>
+  </a>
+  <a href="#projects" class="side-hud__node" data-section="projects">
+    <span class="side-hud__label">03 // Projects</span>
+  </a>
+  <a href="#stack" class="side-hud__node" data-section="stack">
+    <span class="side-hud__label">04 // Stack</span>
+  </a>
+  <a href="#research" class="side-hud__node" data-section="research">
+    <span class="side-hud__label">05 // Research</span>
+  </a>
+  <a href="#arcade" class="side-hud__node" data-section="arcade">
+    <span class="side-hud__label">06 // Arcade</span>
+  </a>
+  <a href="#contact" class="side-hud__node" data-section="contact">
+    <span class="side-hud__label">07 // Contact</span>
+  </a>
+</nav>
+
+<!-- Main Navigation Bar -->
+<header class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <a href="#home" class="navbar__brand">
+      <span class="navbar__logo-gem">PK</span>
+      <span>PRATHAM KASHYAP</span>
+    </a>
+    
+    <ul class="navbar__links">
+      <li><a href="#about" class="navbar__link">About</a></li>
+      <li><a href="#projects" class="navbar__link">Projects</a></li>
+      <li><a href="#stack" class="navbar__link">Stack</a></li>
+      <li><a href="#research" class="navbar__link">Research</a></li>
+      <li><a href="#arcade" class="navbar__link">Arcade</a></li>
+      <li><a href="#contact" class="navbar__link">Contact</a></li>
+    </ul>
+
+    <div class="navbar__right">
+      <button class="sfx-toggle" id="sfxToggle">
+        <span id="sfxIcon">🔊</span>
+        <span id="sfxText">SFX: ON</span>
+      </button>
+      <a href="https://github.com/prathamkashyap" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" style="padding: 0.55rem 1.1rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="hero" id="home">
+    <div class="container hero__grid">
+      <div class="hero__content">
+        <div class="hero__kicker-badge">
+          <span class="hero__pulse-dot"></span>
+          <span>AI SYSTEMS &amp; SOFTWARE ARCHITECT</span>
+        </div>
+        <h1 class="hero__title">
+          Engineering complete AI systems <span class="accent-gradient">from notebook to product.</span>
+        </h1>
+        <p class="hero__body">
+          I build production-oriented AI architectures — pairing computer vision models, geospatial machine learning, and high-throughput backend APIs into reliable software people can actually use.
+        </p>
+        <div class="hero__actions">
+          <a href="#projects" class="btn btn--primary">
+            <span>Explore Builds</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#contact" class="btn btn--ghost">
+            <span>Get in Touch</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Restored Full-Sized Clean System Code Terminal -->
+      <div class="hero-glass-terminal tilt-card">
+        <div class="card-glare"></div>
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="terminal-title">pratham@systems-core:~</div>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line">
+            <span class="terminal-prompt">$</span> <span class="terminal-cmd">cat profile.json</span>
+          </div>
+          <div class="terminal-out">
+            {<br/>
+            &nbsp;&nbsp;<span style="color:var(--electric-cyan)">"name"</span>: <span style="color:var(--starlight)">"Pratham Kashyap"</span>,<br/>
+            &nbsp;&nbsp;<span style="color:var(--electric-cyan)">"role"</span>: <span style="color:var(--starlight)">"AI Systems Engineer"</span>,<br/>
+            &nbsp;&nbsp;<span style="color:var(--electric-cyan)">"focus"</span>: [<span style="color:var(--ice-blue)">"Applied AI"</span>, <span style="color:var(--ice-blue)">"Computer Vision"</span>, <span style="color:var(--ice-blue)">"Backend APIs"</span>],<br/>
+            &nbsp;&nbsp;<span style="color:var(--electric-cyan)">"flagship"</span>: <span style="color:var(--emerald)">"AthenaeumAI"</span>,<br/>
+            &nbsp;&nbsp;<span style="color:var(--electric-cyan)">"pipeline"</span>: <span style="color:var(--amber)">"idea → model → api → data → system"</span><br/>
+            }
+          </div>
+          <div class="terminal-line" style="margin-top: 1.2rem;">
+            <span class="terminal-prompt">$</span> <span class="terminal-cmd">system-status --all</span>
+          </div>
+          <div class="terminal-out">
+            <span class="terminal-tag">✓ 5+ Shipped Builds</span>
+            <span class="terminal-tag">✓ 4 Research Tracks</span>
+            <span class="terminal-tag">✓ Real-Time CV Deployed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT & PHILOSOPHY ==================== -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-head__kicker">Philosophy</p>
+        <h2 class="section-head__title">Bridging the Gap Between <span class="accent-gradient">Models &amp; Production.</span></h2>
+        <p class="section-head__desc">
+          Training an algorithm in a Jupyter notebook is usually just the first 20%. The remaining 80% is where engineering matters — data validation, low-latency API contracts, resilient storage schemas, and fault-tolerant user interfaces.
+        </p>
+      </div>
+
+      <div class="build-matrix">
+        <div class="build-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="build-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <span class="build-card__badge">End-to-End</span>
+          <h3 class="build-card__title">Applied AI Systems</h3>
+          <p class="build-card__desc">Building complete pipelines: chunk-based document ingestion, semantic vector retrieval, and LLM inference generation with strict output contracts.</p>
+        </div>
+
+        <div class="build-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="build-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <span class="build-card__badge">Real-Time</span>
+          <h3 class="build-card__title">Computer Vision</h3>
+          <p class="build-card__desc">Lightweight edge-ready vision pipelines using YOLOv8/11 and SAM for object detection, dwell-time estimation, and crop pathology diagnosis.</p>
+        </div>
+
+        <div class="build-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="build-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <span class="build-card__badge">Resilient</span>
+          <h3 class="build-card__title">Backend &amp; Distributed APIs</h3>
+          <p class="build-card__desc">Designing RESTful services in Node.js, Express, FastAPI, and Java Spring Boot with clean schema validation and persistent databases.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FEATURED PROJECTS ==================== -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-head__kicker">Selected Work</p>
+        <h2 class="section-head__title">Featured <span class="accent-gradient">Engineering Builds.</span></h2>
+        <p class="section-head__desc">
+          A showcase of systems where machine learning models are wrapped into robust, production-ready software architectures.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <article class="project-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="project-card__info">
+            <p class="project-card__num">BUILD // 01 · ACTIVE FLAGSHIP</p>
+            <h3 class="project-card__title">AthenaeumAI</h3>
+            <p class="project-card__summary">
+              AI-powered study platform that transforms dense course material into interactive quizzes, active recall sessions, and adaptive revision schedules.
+            </p>
+            <p class="project-card__details">
+              Engineered document parsing with chunk-based semantic extraction, Groq LLM-powered test generation, and MongoDB state persistence behind a React web interface.
+            </p>
+            <div class="project-card__tags">
+              <span class="project-tag">React</span>
+              <span class="project-tag">Node.js</span>
+              <span class="project-tag">MongoDB</span>
+              <span class="project-tag">Groq API</span>
+              <span class="project-tag">Tailwind</span>
+            </div>
+            <a href="https://github.com/prathamkashyap/AthenaeumAI" target="_blank" rel="noopener noreferrer" class="project-card__link">
+              <span>View Source Code</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
+          <div class="project-card__visual">
+            <div class="metric-row">
+              <span class="metric-label">ARCHITECTURE</span>
+              <span class="metric-val">Semantic RAG Pipeline</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">GENERATION SPEED</span>
+              <span class="metric-val">&lt; 1.2s Latency</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">DATA LAYER</span>
+              <span class="metric-val">MongoDB Atlas</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">FRONTEND</span>
+              <span class="metric-val">Modular React</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="project-card__info">
+            <p class="project-card__num">BUILD // 02 · GEOSPATIAL ML</p>
+            <h3 class="project-card__title">CiviQ — Civic Issue Register</h3>
+            <p class="project-card__summary">
+              Geospatial machine learning platform for automated classification and severity prioritization of urban municipal complaints.
+            </p>
+            <p class="project-card__details">
+              Combines domain-knowledge labels, KNN spatial density features, DBSCAN hotspot clustering, and an XGBoost ensemble classifier validated against real NYC 311 incident records.
+            </p>
+            <div class="project-card__tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">XGBoost</span>
+              <span class="project-tag">DBSCAN</span>
+              <span class="project-tag">React</span>
+              <span class="project-tag">Firebase</span>
+            </div>
+            <a href="https://github.com/prathamkashyap/CiviQ" target="_blank" rel="noopener noreferrer" class="project-card__link">
+              <span>View Source Code</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
+          <div class="project-card__visual">
+            <div class="metric-row">
+              <span class="metric-label">VALIDATION ACCURACY</span>
+              <span class="metric-val">95.7% Verified</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">DATASET SOURCE</span>
+              <span class="metric-val">NYC 311 Open Data</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">CLUSTERING</span>
+              <span class="metric-val">DBSCAN Hotspots</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">CLASSIFIER</span>
+              <span class="metric-val">Tuned XGBoost</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="project-card__info">
+            <p class="project-card__num">BUILD // 03 · COMPUTER VISION</p>
+            <h3 class="project-card__title">Smart Retail Store Assistant</h3>
+            <p class="project-card__summary">
+              Zero-shot single-camera shelf monitoring, inventory dwell-time estimation, and real-time stock removal anomaly detection.
+            </p>
+            <p class="project-card__details">
+              Built using YOLOv8 object detection paired with velocity-predicted centroid tracking to monitor specific shelf coordinate polygons without requiring custom domain re-training.
+            </p>
+            <div class="project-card__tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">OpenCV</span>
+              <span class="project-tag">YOLOv8</span>
+              <span class="project-tag">NumPy</span>
+              <span class="project-tag">SciPy</span>
+            </div>
+            <a href="https://github.com/prathamkashyap/Smart-Retail-Store-Assistant" target="_blank" rel="noopener noreferrer" class="project-card__link">
+              <span>View Source Code</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
+          <div class="project-card__visual">
+            <div class="metric-row">
+              <span class="metric-label">CAMERA SETUP</span>
+              <span class="metric-val">Single Monocular</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">DETECTOR</span>
+              <span class="metric-val">YOLOv8 Real-Time</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">TRACKING METHOD</span>
+              <span class="metric-val">Velocity Centroid</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">ALERT LATENCY</span>
+              <span class="metric-val">&lt; 80ms Response</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4 -->
+        <article class="project-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="project-card__info">
+            <p class="project-card__num">BUILD // 04 · MULTIMODAL AI</p>
+            <h3 class="project-card__title">Multimodal AI Assistant</h3>
+            <p class="project-card__summary">
+              Face-gated voice assistant that co-activates voice recognition only when user visual presence and attention are verified.
+            </p>
+            <p class="project-card__details">
+              Integrates OpenCV Haar-cascade presence gating, OpenAI Whisper voice transcription, and a deterministic 5-category intent classification engine with fallback handling.
+            </p>
+            <div class="project-card__tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Whisper</span>
+              <span class="project-tag">OpenCV</span>
+              <span class="project-tag">MediaPipe</span>
+              <span class="project-tag">Tkinter</span>
+            </div>
+            <a href="https://github.com/prathamkashyap/Multimodal-AI-Assistant" target="_blank" rel="noopener noreferrer" class="project-card__link">
+              <span>View Source Code</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
+          <div class="project-card__visual">
+            <div class="metric-row">
+              <span class="metric-label">GATING MECHANISM</span>
+              <span class="metric-val">Visual Gaze + Face</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">AUDIO INFERENCE</span>
+              <span class="metric-val">Whisper Base</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">FALSE POSITIVES</span>
+              <span class="metric-val">Near-Zero Trigger</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">PUBLICATION</span>
+              <span class="metric-val">IEEE Research Paper</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 5 -->
+        <article class="project-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="project-card__info">
+            <p class="project-card__num">BUILD // 05 · COMPUTER VISION</p>
+            <h3 class="project-card__title">AgriTech — Crop Disease Detector</h3>
+            <p class="project-card__summary">
+              Computer vision pipeline combining the Segment Anything Model (SAM) and YOLOv11 for multi-crop leaf pathology segmentation and diagnosis.
+            </p>
+            <p class="project-card__details">
+              Isolates irregular leaf surfaces using prompt-driven SAM segmentation masks, followed by custom-trained YOLOv11 and TFLite lightweight models for wheat, tomato, and cotton diseases.
+            </p>
+            <div class="project-card__tags">
+              <span class="project-tag">YOLOv11</span>
+              <span class="project-tag">Segment Anything (SAM)</span>
+              <span class="project-tag">TensorFlow Lite</span>
+              <span class="project-tag">OpenCV</span>
+            </div>
+            <a href="https://github.com/prathamkashyap/AgriTech-Plant-Disease-Detection" target="_blank" rel="noopener noreferrer" class="project-card__link">
+              <span>View Source Code</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
+          <div class="project-card__visual">
+            <div class="metric-row">
+              <span class="metric-label">SEGMENTATION</span>
+              <span class="metric-val">Meta SAM Masks</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">DETECTOR</span>
+              <span class="metric-val">YOLOv11 Pathology</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">SUPPORTED CROPS</span>
+              <span class="metric-val">Wheat, Tomato, Cotton</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">EDGE DEPLOYMENT</span>
+              <span class="metric-val">TensorFlow Lite</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TECH CONSTELLATION ==================== -->
+  <section class="section" id="stack">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-head__kicker">Tech Stack</p>
+        <h2 class="section-head__title">Interactive <span class="accent-gradient">Technology Constellations.</span></h2>
+        <p class="section-head__desc">
+          Core engineering domains mapped as dynamic celestial geometries. Hover over any star to illuminate its orbital conduits.
+        </p>
+      </div>
+
+      <!-- Distinctive, Non-Generic Geometric Constellations -->
+      <div class="constellation-wrapper">
+        <svg id="constellationSvg"></svg>
+      </div>
+
+      <!-- Harmonized Stack Cards (Obsidian & Cyan/Purple Palette) -->
+      <div class="stack-chips-grid">
+        <!-- 01 Languages -->
+        <div class="stack-category tilt-card">
+          <div class="card-glare"></div>
+          <div class="stack-category__head">
+            <p class="stack-category__title">01 // Languages</p>
+            <svg class="stack-category__icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="stack-list">
+            <span class="stack-pill">Python</span>
+            <span class="stack-pill">C++</span>
+            <span class="stack-pill">Java</span>
+            <span class="stack-pill">TypeScript</span>
+            <span class="stack-pill">JavaScript</span>
+            <span class="stack-pill">SQL</span>
+          </div>
+        </div>
+
+        <!-- 02 AI & Vision -->
+        <div class="stack-category tilt-card">
+          <div class="card-glare"></div>
+          <div class="stack-category__head">
+            <p class="stack-category__title">02 // AI &amp; Vision</p>
+            <svg class="stack-category__icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M3 12h1m16 0h1M12 3v1m0 16v1M5.6 5.6l.7.7m11.4 11.4l.7.7M5.6 18.4l.7-.7m11.4-11.4l.7-.7"/></svg>
+          </div>
+          <div class="stack-list">
+            <span class="stack-pill">PyTorch</span>
+            <span class="stack-pill">OpenCV</span>
+            <span class="stack-pill">YOLOv8/11</span>
+            <span class="stack-pill">SAM</span>
+            <span class="stack-pill">Scikit-learn</span>
+            <span class="stack-pill">Whisper</span>
+          </div>
+        </div>
+
+        <!-- 03 Backend & Web -->
+        <div class="stack-category tilt-card">
+          <div class="card-glare"></div>
+          <div class="stack-category__head">
+            <p class="stack-category__title">03 // Backend &amp; Web</p>
+            <svg class="stack-category__icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <div class="stack-list">
+            <span class="stack-pill">Node.js</span>
+            <span class="stack-pill">FastAPI</span>
+            <span class="stack-pill">Express</span>
+            <span class="stack-pill">Spring Boot</span>
+            <span class="stack-pill">React</span>
+            <span class="stack-pill">Vite</span>
+          </div>
+        </div>
+
+        <!-- 04 Data & Cloud -->
+        <div class="stack-category tilt-card">
+          <div class="card-glare"></div>
+          <div class="stack-category__head">
+            <p class="stack-category__title">04 // Data &amp; Cloud</p>
+            <svg class="stack-category__icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+          </div>
+          <div class="stack-list">
+            <span class="stack-pill">MongoDB</span>
+            <span class="stack-pill">PostgreSQL</span>
+            <span class="stack-pill">Docker</span>
+            <span class="stack-pill">Git</span>
+            <span class="stack-pill">Firebase</span>
+            <span class="stack-pill">Linux</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== RESEARCH & EMPIRICAL SIGNALS ==================== -->
+  <section class="section" id="research">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-head__kicker">Research Notes</p>
+        <h2 class="section-head__title">Applied ML &amp; <span class="accent-gradient">Empirical Signals.</span></h2>
+        <p class="section-head__desc">
+          Structured research findings in neuro-fuzzy ranking systems, geospatial municipal triage, and acoustic biomarker detection.
+        </p>
+      </div>
+
+      <!-- Architectural Telemetry Stream (With Cohesive Distinct Colors) -->
+      <div class="signals-stream">
+        <!-- Signal 01 -->
+        <div class="signal-entry tilt-card">
+          <div class="card-glare"></div>
+          <div class="signal-entry__telemetry">
+            <span class="signal-badge signal-badge--cyan">
+              <span class="signal-indicator"></span>
+              <span>TELEMETRY // 01</span>
+            </span>
+            <span class="signal-metric">R² = 0.98</span>
+            <span class="signal-meta">FUZZY DECISION MODEL</span>
+          </div>
+          <div class="signal-entry__content">
+            <h3 class="signal-title">GA-ET-IVCFS-ANFIS Ranking Architecture</h3>
+            <p class="signal-body">
+              Interval-valued complex fuzzy adaptive neuro-fuzzy inference system (ANFIS) optimized with genetic algorithms for robust multi-criteria decision-making under uncertainty and noise.
+            </p>
+            <div class="signal-tags">
+              <span class="signal-tag">Complex Fuzzy Logic</span>
+              <span class="signal-tag">Genetic Optimization</span>
+              <span class="signal-tag">ANFIS Systems</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Signal 02 -->
+        <div class="signal-entry tilt-card">
+          <div class="card-glare"></div>
+          <div class="signal-entry__telemetry">
+            <span class="signal-badge signal-badge--violet">
+              <span class="signal-indicator"></span>
+              <span>TELEMETRY // 02</span>
+            </span>
+            <span class="signal-metric">95.7% ACC</span>
+            <span class="signal-meta">GEOSPATIAL TRIAGE</span>
+          </div>
+          <div class="signal-entry__content">
+            <h3 class="signal-title">Civic Complaint Prioritization Framework</h3>
+            <p class="signal-body">
+              Hybrid synthetic + NYC 311 evaluation framework combining KNN density clustering and tree ensembles for automated geospatial municipal incident classification.
+            </p>
+            <div class="signal-tags">
+              <span class="signal-tag">XGBoost Ensemble</span>
+              <span class="signal-tag">DBSCAN Spatial Hotspots</span>
+              <span class="signal-tag">NYC 311 Verified</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Signal 03 -->
+        <div class="signal-entry tilt-card">
+          <div class="card-glare"></div>
+          <div class="signal-entry__telemetry">
+            <span class="signal-badge signal-badge--sky">
+              <span class="signal-indicator"></span>
+              <span>TELEMETRY // 03</span>
+            </span>
+            <span class="signal-metric">F1 = 0.935</span>
+            <span class="signal-meta">ROC-AUC = 0.945</span>
+          </div>
+          <div class="signal-entry__content">
+            <h3 class="signal-title">Parkinson's Acoustic Biomarker Mining</h3>
+            <p class="signal-body">
+              Acoustic feature extraction and high-dimensional SVM classification pipeline for non-invasive voice disorder detection and early screening signals.
+            </p>
+            <div class="signal-tags">
+              <span class="signal-tag">Acoustic Signal Extraction</span>
+              <span class="signal-tag">SVM Kernel Classifier</span>
+              <span class="signal-tag">Biomarker Triage</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Signal 04 -->
+        <div class="signal-entry tilt-card">
+          <div class="card-glare"></div>
+          <div class="signal-entry__telemetry">
+            <span class="signal-badge signal-badge--emerald">
+              <span class="signal-indicator"></span>
+              <span>TELEMETRY // 04</span>
+            </span>
+            <span class="signal-metric">IEEE SOLO</span>
+            <span class="signal-meta">PUBLISHED PAPER</span>
+          </div>
+          <div class="signal-entry__content">
+            <h3 class="signal-title">Multimodal Gaze &amp; Voice Interaction Systems</h3>
+            <p class="signal-body">
+              Research examining low-overhead presence-gated audio co-activation architectures for responsive, false-trigger-resistant human-computer multimodal interfaces.
+            </p>
+            <div class="signal-tags">
+              <span class="signal-tag">Haar Face-Gating</span>
+              <span class="signal-tag">Whisper Speech Base</span>
+              <span class="signal-tag">Zero False Triggers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SPACE ARCADE MINI-GAME ==================== -->
+  <section class="section" id="arcade">
+    <div class="container">
+      <div class="arcade-container">
+        <p class="section-head__kicker" style="justify-content: center;">Space Arcade</p>
+        <h2 class="section-head__title">Asteroid <span class="accent-gradient">Defender.</span></h2>
+        <p class="section-head__desc" style="margin: 0.5rem auto 0;">
+          Interactive canvas mini-game built right into the portfolio. Dodge deep space asteroids and gather energy stars!
+        </p>
+
+        <div class="arcade-viewport">
+          <canvas id="arcadeCanvas"></canvas>
+          <div class="arcade-hud">
+            <span>SCORE: <b id="arcadeScore">0</b></span>
+            <span>BEST: <b id="arcadeBest">0</b></span>
+          </div>
+
+          <div class="arcade-overlay" id="arcadeOverlay">
+            <h4 id="arcadeOverlayTitle">Mission Briefing</h4>
+            <p id="arcadeOverlaySub">Pilot your craft with arrow keys or WASD. Dodge rogue asteroids and collect cyan stars.</p>
+            <div class="arcade-keys-hint">
+              <span>Controls: <kbd>▲</kbd> <kbd>◀</kbd> <kbd>▼</kbd> <kbd>▶</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span>
+            </div>
+            <button class="btn btn--primary" id="arcadeStartBtn">Launch Mission</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT & FOOTER ==================== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-card tilt-card">
+        <div class="card-glare"></div>
+        <h2 class="contact-card__title">Let's build software <span class="accent-gradient">that matters.</span></h2>
+        <p class="contact-card__desc">
+          Whether you want to discuss AI systems, computer vision pipelines, backend architecture, or potential collaborations — my inbox is always open.
+        </p>
+        
+        <div class="contact-card__buttons">
+          <a href="mailto:pkmail2005@gmail.com" class="btn btn--primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>Email Me Directly</span>
+          </a>
+          <button class="btn btn--ghost" id="copyEmailBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy pkmail2005@gmail.com</span>
+          </button>
+        </div>
+        <p class="copy-badge" id="copyBadge">✓ Email copied to clipboard!</p>
+      </div>
+
+      <footer class="footer">
+        <div class="footer__inner">
+          <p class="footer__tagline">
+            Built to Run · Not Just to Demo · © <span id="currentYear"></span> Pratham Kashyap
+          </p>
+          <div class="footer__socials">
+            <a href="https://github.com/prathamkashyap" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="GitHub">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/prathamkashyap5" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="LinkedIn">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://kaggle.com/prathamkashyap17" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="Kaggle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.825 23.859c-.022.086-.117.141-.216.141h-3.139c-.187 0-.351-.082-.457-.224l-4.902-6.579-2.138 2.052v4.469c0 .188-.152.341-.341.341h-2.291c-.189 0-.341-.153-.341-.341v-23.376c0-.188.152-.341.341-.341h2.291c.189 0 .341.153.341.341v14.076l6.732-6.843c.112-.114.267-.179.43-.179h3.315c.106 0 .204.06.223.151.023.109-.033.221-.13.272l-6.852 6.643 7.375 9.871c.084.113.093.266.023.387z"/></svg>
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+  /* ============================================================
+     0. CALM & HARMONIOUS CELESTIAL AUDIO CHIME SYNTHESIZER
+     ============================================================ */
+  let sfxEnabled = true;
+  let audioCtx = null;
+
+  function initAudio() {
+    if (!audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) audioCtx = new AudioContext();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+  }
+
+  // Soothing, calm harmonic celestial bell / chime
+  function playCalmChimeSound() {
+    if (!sfxEnabled) return;
+    initAudio();
+    if (!audioCtx) return;
+
+    const t = audioCtx.currentTime;
+    const freqs = [528, 792, 1056]; // Harmonious Solfeggio / Ambient intervals
+
+    freqs.forEach((freq, idx) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, t);
+
+      const amp = 0.05 / (idx + 1);
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(amp, t + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.35 + idx * 0.1);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(t);
+      osc.stop(t + 0.45 + idx * 0.1);
+    });
+  }
+
+  const sfxToggleBtn = document.getElementById('sfxToggle');
+  const sfxIcon = document.getElementById('sfxIcon');
+  const sfxText = document.getElementById('sfxText');
+  sfxToggleBtn.addEventListener('click', () => {
+    sfxEnabled = !sfxEnabled;
+    sfxIcon.textContent = sfxEnabled ? '🔊' : '🔇';
+    sfxText.textContent = sfxEnabled ? 'SFX: ON' : 'SFX: OFF';
+    if (sfxEnabled) playCalmChimeSound();
+  });
+
+  /* ============================================================
+     1. CUSTOM ANIME CURSOR & PARTICLE TRAIL
+     ============================================================ */
+  const cursor = document.getElementById('cursor');
+  const cursorDot = document.getElementById('cursorDot');
+  const sCanvas = document.getElementById('slashCanvas');
+  const sCtx = sCanvas.getContext('2d');
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let curX = mouseX;
+  let curY = mouseY;
+  let trail = [];
+
+  function resizeSlashCanvas() {
+    sCanvas.width = window.innerWidth;
+    sCanvas.height = window.innerHeight;
+  }
+  resizeSlashCanvas();
+  window.addEventListener('resize', resizeSlashCanvas);
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    trail.push({
+      x: mouseX,
+      y: mouseY,
+      life: 1,
+      size: Math.random() * 2.5 + 1.5,
+      vx: (Math.random() - 0.5) * 1.5,
+      vy: (Math.random() - 0.5) * 1.5
+    });
+  });
+
+  document.querySelectorAll('a, button, .tilt-card, .constellation-node, .constellation-cluster, .signal-entry').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('hovering');
+      playCalmChimeSound();
+    });
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+  });
+
+  window.addEventListener('click', (e) => {
+    playCalmChimeSound();
+    for (let i = 0; i < 16; i++) {
+      const angle = (Math.PI * 2 / 16) * i;
+      const speed = Math.random() * 4 + 2;
+      trail.push({
+        x: e.clientX,
+        y: e.clientY,
+        life: 1.0,
+        size: Math.random() * 3 + 2,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        isBurst: true
+      });
+    }
+  });
+
+  function renderCursorAndTrail() {
+    curX += (mouseX - curX) * 0.22;
+    curY += (mouseY - curY) * 0.22;
+
+    cursor.style.left = `${curX}px`;
+    cursor.style.top = `${curY}px`;
+    cursorDot.style.left = `${mouseX}px`;
+    cursorDot.style.top = `${mouseY}px`;
+
+    sCtx.clearRect(0, 0, sCanvas.width, sCanvas.height);
+    for (let i = trail.length - 1; i >= 0; i--) {
+      const p = trail[i];
+      p.x += p.vx || 0;
+      p.y += p.vy || 0;
+      p.life -= p.isBurst ? 0.04 : 0.035;
+
+      if (p.life <= 0) {
+        trail.splice(i, 1);
+        continue;
+      }
+
+      sCtx.beginPath();
+      sCtx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+      sCtx.fillStyle = p.isBurst 
+        ? `rgba(168, 85, 247, ${p.life})` 
+        : `rgba(79, 224, 255, ${p.life * 0.7})`;
+      sCtx.shadowColor = p.isBurst ? '#A855F7' : '#4FE0FF';
+      sCtx.shadowBlur = 10;
+      sCtx.fill();
+    }
+    sCtx.shadowBlur = 0;
+
+    requestAnimationFrame(renderCursorAndTrail);
+  }
+  renderCursorAndTrail();
+
+  /* ============================================================
+     2. 3D CARD TILT & MOUSE-TRACKING GLARE EFFECT
+     ============================================================ */
+  const tiltCards = document.querySelectorAll('.tilt-card');
+  tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
+      
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.015, 1.015, 1.015)`;
+      
+      const glare = card.querySelector('.card-glare');
+      if (glare) {
+        glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(79, 224, 255, 0.18) 0%, transparent 60%)`;
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    });
+  });
+
+  /* ============================================================
+     3. 3D CELESTIAL SINGULARITY & ACCRETION NEBULA (THREE.JS)
+     ============================================================ */
+  function initCelestialCoreSpace() {
+    const canvas = document.getElementById('ambientBgCanvas');
+    if (!canvas || typeof THREE === 'undefined') return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 50;
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvas,
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance'
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+    // --- 1. Distant Cosmic Starfield ---
+    const starCount = 650;
+    const starGeo = new THREE.BufferGeometry();
+    const starPos = new Float32Array(starCount * 3);
+    const starColors = new Float32Array(starCount * 3);
+
+    const cCyan = new THREE.Color(0x4FE0FF);
+    const cViolet = new THREE.Color(0x8B5CF6);
+    const cWhite = new THREE.Color(0xFBFDFF);
+
+    for (let i = 0; i < starCount; i++) {
+      starPos[i * 3] = (Math.random() - 0.5) * 120;
+      starPos[i * 3 + 1] = (Math.random() - 0.5) * 120;
+      starPos[i * 3 + 2] = (Math.random() - 0.5) * 80;
+
+      const pick = Math.random();
+      let col;
+      if (pick < 0.45) col = cWhite;
+      else if (pick < 0.78) col = cCyan;
+      else col = cViolet;
+
+      starColors[i * 3] = col.r;
+      starColors[i * 3 + 1] = col.g;
+      starColors[i * 3 + 2] = col.b;
+    }
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+
+    const starMat = new THREE.PointsMaterial({
+      size: 0.16,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.75,
+      blending: THREE.AdditiveBlending
+    });
+    const starfield = new THREE.Points(starGeo, starMat);
+    scene.add(starfield);
+
+    // --- 2. Majestic Celestial Singularity & Rotating Accretion Vortex ---
+    const coreGroup = new THREE.Group();
+    coreGroup.position.set(22, 6, -20);
+    scene.add(coreGroup);
+
+    // Luminous Accretion Disk Swarm
+    const diskCount = 800;
+    const diskGeo = new THREE.BufferGeometry();
+    const diskPos = new Float32Array(diskCount * 3);
+    const diskCol = new Float32Array(diskCount * 3);
+    const diskMeta = [];
+
+    for (let i = 0; i < diskCount; i++) {
+      const radius = Math.pow(Math.random(), 0.7) * 14 + 3.0;
+      const angle = Math.random() * Math.PI * 2;
+      const vSpeed = (1 / radius) * 0.04 + 0.005;
+      const zOffset = (Math.random() - 0.5) * (0.8 + radius * 0.1);
+
+      diskMeta.push({ radius, angle, vSpeed, zOffset });
+
+      diskPos[i * 3] = Math.cos(angle) * radius;
+      diskPos[i * 3 + 1] = Math.sin(angle) * radius * 0.45;
+      diskPos[i * 3 + 2] = zOffset;
+
+      const t = radius / 18;
+      const col = cCyan.clone().lerp(cViolet, t);
+      diskCol[i * 3] = col.r;
+      diskCol[i * 3 + 1] = col.g;
+      diskCol[i * 3 + 2] = col.b;
+    }
+    diskGeo.setAttribute('position', new THREE.BufferAttribute(diskPos, 3));
+    diskGeo.setAttribute('color', new THREE.BufferAttribute(diskCol, 3));
+
+    const diskMat = new THREE.PointsMaterial({
+      size: 0.24,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending
+    });
+    const accretionDisk = new THREE.Points(diskGeo, diskMat);
+    coreGroup.add(accretionDisk);
+
+    // Concentric Gyroscopic Celestial Rings
+    const gyroRingGeo1 = new THREE.TorusGeometry(8.5, 0.04, 16, 90);
+    const gyroRingMat1 = new THREE.MeshBasicMaterial({ color: 0x4FE0FF, wireframe: true, transparent: true, opacity: 0.25 });
+    const gyroRing1 = new THREE.Mesh(gyroRingGeo1, gyroRingMat1);
+    gyroRing1.rotation.x = Math.PI / 3;
+    coreGroup.add(gyroRing1);
+
+    const gyroRingGeo2 = new THREE.TorusGeometry(12.0, 0.03, 16, 110);
+    const gyroRingMat2 = new THREE.MeshBasicMaterial({ color: 0xA855F7, wireframe: true, transparent: true, opacity: 0.2 });
+    const gyroRing2 = new THREE.Mesh(gyroRingGeo2, gyroRingMat2);
+    gyroRing2.rotation.y = Math.PI / 4;
+    coreGroup.add(gyroRing2);
+
+    let mouseTargetX = 0;
+    let mouseTargetY = 0;
+    window.addEventListener('mousemove', (e) => {
+      mouseTargetX = (e.clientX / window.innerWidth - 0.5) * 0.45;
+      mouseTargetY = (e.clientY / window.innerHeight - 0.5) * 0.45;
+    });
+
+    function animateSpace() {
+      requestAnimationFrame(animateSpace);
+      starfield.rotation.y += 0.0003;
+      starfield.rotation.x += 0.00015;
+
+      // Animate Accretion Particles
+      const pArr = diskGeo.attributes.position.array;
+      for (let i = 0; i < diskCount; i++) {
+        const m = diskMeta[i];
+        m.angle += m.vSpeed;
+        pArr[i * 3] = Math.cos(m.angle) * m.radius;
+        pArr[i * 3 + 1] = Math.sin(m.angle) * m.radius * 0.45;
+        pArr[i * 3 + 2] = m.zOffset;
+      }
+      diskGeo.attributes.position.needsUpdate = true;
+
+      // Rotate Gyro Celestial Rings
+      gyroRing1.rotation.z += 0.004;
+      gyroRing2.rotation.z -= 0.003;
+      coreGroup.rotation.y += 0.001;
+
+      // Mouse Parallax
+      camera.position.x += (mouseTargetX * 8 - camera.position.x) * 0.025;
+      camera.position.y += (-mouseTargetY * 8 - camera.position.y) * 0.025;
+      camera.lookAt(scene.position);
+
+      renderer.render(scene, camera);
+    }
+    animateSpace();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  }
+  initCelestialCoreSpace();
+
+  /* ============================================================
+     3b. FAST-MOVING CANVAS PARTICLE FIELD (GPU OPTIMIZED)
+     ============================================================ */
+  (function initParticleField() {
+    const canvas = document.getElementById('particleCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { alpha: true });
+
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    const palettes = [
+      { r: 79,  g: 224, b: 255 }, // electric-cyan
+      { r: 168, g: 85,  b: 247 }, // blade-purple
+      { r: 56,  g: 189, b: 248 }, // sky-blue
+      { r: 147, g: 233, b: 255 }, // ice-blue
+      { r: 47,  g: 107, b: 255 }, // deep-blue
+    ];
+
+    const PARTICLE_COUNT = 70;
+    const particles = [];
+
+    function randomParticle(overrideY) {
+      const col = palettes[Math.floor(Math.random() * palettes.length)];
+      return {
+        x:      Math.random() * canvas.width,
+        y:      overrideY !== undefined ? overrideY : Math.random() * canvas.height,
+        r:      Math.random() * 2.0 + 0.8,
+        vx:     (Math.random() - 0.5) * 0.5,
+        vy:     -(Math.random() * 1.6 + 0.9),
+        alpha:  Math.random() * 0.55 + 0.25,
+        col,
+        twinkle: Math.random() * Math.PI * 2,
+        twinkleSpeed: Math.random() * 0.04 + 0.015,
+      };
+    }
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push(randomParticle());
+    }
+
+    function tickParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.twinkle += p.twinkleSpeed;
+
+        if (p.y + p.r * 3 < 0) {
+          particles[i] = randomParticle(canvas.height + p.r * 3);
+        }
+        if (p.x < -10) p.x = canvas.width + 10;
+        if (p.x > canvas.width + 10) p.x = -10;
+
+        const alphaMod = p.alpha * (0.75 + 0.25 * Math.sin(p.twinkle));
+        
+        // Fast optimized glow drawing without heavy gradient allocations
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 2.2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.col.r}, ${p.col.g}, ${p.col.b}, ${alphaMod * 0.25})`;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.col.r}, ${p.col.g}, ${p.col.b}, ${alphaMod})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(tickParticles);
+    }
+    tickParticles();
+  })();
+
+  /* ============================================================
+     4. SIDE HUD SCROLL PROGRESS & ACTIVE TRACKING
+     ============================================================ */
+  const hudProgress = document.getElementById('hudProgress');
+  const hudNodes = document.querySelectorAll('.side-hud__node');
+  const sections = Array.from(hudNodes).map(n => document.getElementById(n.dataset.section)).filter(Boolean);
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    
+    if (hudProgress) {
+      hudProgress.style.height = `${scrollPercent}%`;
+    }
+
+    let current = "";
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 200;
+      if (scrollTop >= top) {
+        current = sec.getAttribute('id');
+      }
+    });
+
+    hudNodes.forEach(node => {
+      node.classList.remove('active');
+      if (node.dataset.section === current) {
+        node.classList.add('active');
+      }
+    });
+
+    const navbar = document.getElementById('navbar');
+    if (scrollTop > 40) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+  });
+
+  /* ============================================================
+     5. ATTRACTIVE 2x2 GEOMETRIC CELESTIAL CONSTELLATIONS
+     ============================================================ */
+  const constellationSvg = document.getElementById('constellationSvg');
+  constellationSvg.setAttribute('viewBox', '0 0 1100 680');
+  
+  // 4 Completely Distinct Geometries in a Spacious 2x2 Matrix
+  const clusters = [
+    // Top-Left: Lightning Starlight Zigzag
+    {
+      id: "languages",
+      name: "01 // Languages · Starlight Lightning",
+      cx: 275, cy: 300,
+      color: "#4FE0FF",
+      pts: [
+        { x: 120, y: 70,  name: "Python",     align: "end",    dx: -16, dy: 4 },
+        { x: 280, y: 120, name: "C++",        align: "start",  dx: 16,  dy: 4 },
+        { x: 180, y: 190, name: "Java",       align: "end",    dx: -16, dy: 4 },
+        { x: 380, y: 220, name: "TypeScript", align: "start",  dx: 16,  dy: 4 },
+        { x: 260, y: 275, name: "SQL",        align: "middle", dx: 0,   dy: 20 }
+      ],
+      path: "M 120 70 L 280 120 L 180 190 L 380 220 L 260 275"
+    },
+    // Top-Right: Neural Starburst Nexus
+    {
+      id: "ai",
+      name: "02 // AI & Vision · Neural Starburst",
+      cx: 825, cy: 300,
+      color: "#A855F7",
+      pts: [
+        { x: 825, y: 170, name: "PyTorch",      align: "middle", dx: 0,   dy: -14 },
+        { x: 825, y: 65,  name: "YOLOv8/11",   align: "middle", dx: 0,   dy: -14 },
+        { x: 970, y: 130, name: "OpenCV",       align: "start",  dx: 16,  dy: 4 },
+        { x: 935, y: 255, name: "SAM",          align: "start",  dx: 16,  dy: 4 },
+        { x: 715, y: 255, name: "Whisper",      align: "end",    dx: -16, dy: 4 },
+        { x: 680, y: 130, name: "Scikit-Learn", align: "end",    dx: -16, dy: 4 }
+      ],
+      path: "M 825 65 L 970 130 L 935 255 L 715 255 L 680 130 Z M 825 170 L 825 65 M 825 170 L 970 130 M 825 170 L 935 255 M 825 170 L 715 255 M 825 170 L 680 130"
+    },
+    // Bottom-Left: Double Helix Interlocking Gateway Triangles
+    {
+      id: "backend",
+      name: "03 // Backend & Web · Double Helix Gateway",
+      cx: 275, cy: 640,
+      color: "#38BDF8",
+      pts: [
+        { x: 275, y: 400, name: "Node.js",     align: "middle", dx: 0,   dy: -14 },
+        { x: 140, y: 500, name: "FastAPI",     align: "end",    dx: -16, dy: 4 },
+        { x: 410, y: 500, name: "Spring Boot", align: "start",  dx: 16,  dy: 4 },
+        { x: 190, y: 590, name: "Express",     align: "end",    dx: -16, dy: 4 },
+        { x: 360, y: 590, name: "React",       align: "start",  dx: 16,  dy: 4 }
+      ],
+      path: "M 275 400 L 140 500 L 410 500 Z M 190 590 L 360 590 L 275 400 Z M 140 500 L 190 590 M 410 500 L 360 590"
+    },
+    // Bottom-Right: Crescent Celestial Moon Orbit
+    {
+      id: "cloud",
+      name: "04 // Data & Cloud · Crescent Celestial Orbit",
+      cx: 825, cy: 640,
+      color: "#93E9FF",
+      pts: [
+        { x: 710,  y: 430, name: "MongoDB",    align: "end",    dx: -16, dy: 4 },
+        { x: 825,  y: 400, name: "PostgreSQL", align: "middle", dx: 0,   dy: -14 },
+        { x: 940,  y: 445, name: "Docker",     align: "start",  dx: 16,  dy: 4 },
+        { x: 910,  y: 565, name: "Git",        align: "start",  dx: 16,  dy: 4 },
+        { x: 770,  y: 600, name: "Linux",      align: "end",    dx: -16, dy: 4 }
+      ],
+      path: "M 710 430 Q 825 360 940 445 Q 980 520 910 565 Q 830 630 770 600 M 710 430 L 910 565 M 825 400 L 770 600"
+    }
+  ];
+
+  function renderConstellations() {
+    constellationSvg.innerHTML = '';
+
+    // Subtle Inter-Quadrant Cosmic Energy Conduits
+    const bridge = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    bridge.setAttribute('d', 'M 380 220 Q 530 160 680 130 M 410 500 Q 550 560 710 430 M 260 275 Q 275 340 275 400 M 935 255 Q 960 340 940 445');
+    bridge.setAttribute('stroke', 'rgba(79, 224, 255, 0.12)');
+    bridge.setAttribute('stroke-width', '1.2');
+    bridge.setAttribute('stroke-dasharray', '5 6');
+    bridge.setAttribute('fill', 'none');
+    constellationSvg.appendChild(bridge);
+
+    clusters.forEach((c) => {
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.setAttribute('class', 'constellation-cluster');
+      g.setAttribute('data-id', c.id);
+
+      const linePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      linePath.setAttribute('d', c.path);
+      linePath.setAttribute('class', 'cluster-link');
+      linePath.setAttribute('stroke', c.color);
+      linePath.setAttribute('stroke-width', '1.5');
+      linePath.setAttribute('fill', 'none');
+      g.appendChild(linePath);
+
+      c.pts.forEach(p => {
+        const nodeG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        nodeG.setAttribute('class', 'constellation-node');
+
+        // Star Aura Halo
+        const halo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        halo.setAttribute('cx', p.x);
+        halo.setAttribute('cy', p.y);
+        halo.setAttribute('r', '14');
+        halo.setAttribute('fill', c.color);
+        halo.setAttribute('opacity', '0.08');
+        nodeG.appendChild(halo);
+
+        // Core Star Dot
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', p.x);
+        circle.setAttribute('cy', p.y);
+        circle.setAttribute('r', '4.5');
+        circle.setAttribute('fill', c.color);
+        circle.setAttribute('class', 'node-circle');
+        nodeG.appendChild(circle);
+
+        // Dimming Backdrop Pill for 100% Crisp Legibility
+        const bgPill = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        const textWidth = p.name.length * 7.5 + 14;
+        let rx = p.x + p.dx;
+        if (p.align === 'end') rx = p.x + p.dx - textWidth + 6;
+        else if (p.align === 'middle') rx = p.x - textWidth / 2;
+        else rx = p.x + p.dx - 6;
+
+        bgPill.setAttribute('x', rx);
+        bgPill.setAttribute('y', p.y + p.dy - 12);
+        bgPill.setAttribute('width', textWidth);
+        bgPill.setAttribute('height', '18');
+        bgPill.setAttribute('rx', '4');
+        bgPill.setAttribute('fill', 'rgba(3, 4, 10, 0.85)');
+        bgPill.setAttribute('stroke', 'rgba(79, 224, 255, 0.18)');
+        bgPill.setAttribute('stroke-width', '0.8');
+        nodeG.appendChild(bgPill);
+
+        // Star Label
+        const lbl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        lbl.setAttribute('x', p.x + p.dx);
+        lbl.setAttribute('y', p.y + p.dy);
+        lbl.setAttribute('text-anchor', p.align);
+        lbl.setAttribute('class', 'node-label');
+        lbl.textContent = p.name;
+        nodeG.appendChild(lbl);
+
+        g.appendChild(nodeG);
+      });
+
+      // Cluster Group Title
+      const title = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      title.setAttribute('x', c.cx);
+      title.setAttribute('y', c.cy);
+      title.setAttribute('class', 'cluster-title');
+      title.textContent = c.name.toUpperCase();
+      g.appendChild(title);
+
+      constellationSvg.appendChild(g);
+    });
+  }
+  renderConstellations();
+
+  /* ============================================================
+     6. SPACE ARCADE MINI-GAME (ASTEROID DEFENDER)
+     ============================================================ */
+  const arcadeCanvas = document.getElementById('arcadeCanvas');
+  const aCtx = arcadeCanvas.getContext('2d');
+  const overlay = document.getElementById('arcadeOverlay');
+  const startBtn = document.getElementById('arcadeStartBtn');
+  const scoreEl = document.getElementById('arcadeScore');
+  const bestEl = document.getElementById('arcadeBest');
+  const overlayTitle = document.getElementById('arcadeOverlayTitle');
+  const overlaySub = document.getElementById('arcadeOverlaySub');
+
+  let aw = 0, ah = 0;
+  let running = false;
+  let score = 0;
+  let best = parseInt(localStorage.getItem('pk_arcade_best') || '0', 10);
+  bestEl.textContent = best;
+
+  let ship = { x: 0, y: 0, vx: 0, vy: 0, r: 11 };
+  let asteroids = [];
+  let energyStars = [];
+  let particles = [];
+  let keys = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false, w: false, s: false, a: false, d: false };
+
+  function resizeArcade() {
+    const rect = arcadeCanvas.getBoundingClientRect();
+    aw = arcadeCanvas.width = rect.width;
+    ah = arcadeCanvas.height = rect.height;
+  }
+  resizeArcade();
+  window.addEventListener('resize', resizeArcade);
+
+  window.addEventListener('keydown', (e) => {
+    if (keys.hasOwnProperty(e.key)) {
+      keys[e.key] = true;
+      if (running) e.preventDefault();
+    }
+  });
+  window.addEventListener('keyup', (e) => {
+    if (keys.hasOwnProperty(e.key)) keys[e.key] = false;
+  });
+
+  function resetGame() {
+    ship.x = aw / 2;
+    ship.y = ah - 60;
+    ship.vx = 0;
+    ship.vy = 0;
+    asteroids = [];
+    energyStars = [];
+    particles = [];
+    score = 0;
+    scoreEl.textContent = '0';
+  }
+
+  function spawnAsteroid() {
+    const r = Math.random() * 16 + 12;
+    asteroids.push({
+      x: Math.random() * (aw - 40) + 20,
+      y: -30,
+      r: r,
+      vy: Math.random() * 2.2 + 2,
+      vx: (Math.random() - 0.5) * 1.5,
+      rot: 0,
+      vrot: (Math.random() - 0.5) * 0.05
+    });
+  }
+
+  function spawnStar() {
+    energyStars.push({
+      x: Math.random() * (aw - 40) + 20,
+      y: -20,
+      r: 8,
+      vy: 2.4,
+      rot: 0
+    });
+  }
+
+  function createExplosion(x, y, color) {
+    for (let i = 0; i < 18; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 5 + 1.5;
+      particles.push({
+        x: x, y: y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 1,
+        color: color
+      });
+    }
+  }
+
+  function gameOver() {
+    running = false;
+    if (score > best) {
+      best = Math.round(score);
+      localStorage.setItem('pk_arcade_best', best);
+      bestEl.textContent = best;
+    }
+    overlayTitle.textContent = "Craft Neutralized!";
+    overlaySub.textContent = `Score: ${Math.round(score)} | All-Time Best: ${best}`;
+    startBtn.textContent = "Re-Launch Mission";
+    overlay.classList.remove('is-hidden');
+  }
+
+  let spawnTimer = 0;
+  let starTimer = 0;
+
+  function arcadeLoop() {
+    if (!running) return;
+
+    const accel = 0.48;
+    const damp = 0.92;
+    if (keys.ArrowUp || keys.w) ship.vy -= accel;
+    if (keys.ArrowDown || keys.s) ship.vy += accel;
+    if (keys.ArrowLeft || keys.a) ship.vx -= accel;
+    if (keys.ArrowRight || keys.d) ship.vx += accel;
+
+    ship.vx *= damp;
+    ship.vy *= damp;
+    ship.x += ship.vx;
+    ship.y += ship.vy;
+
+    if (ship.x < ship.r) ship.x = ship.r;
+    if (ship.x > aw - ship.r) ship.x = aw - ship.r;
+    if (ship.y < ship.r) ship.y = ship.r;
+    if (ship.y > ah - ship.r) ship.y = ah - ship.r;
+
+    spawnTimer++;
+    if (spawnTimer > 42) {
+      spawnAsteroid();
+      spawnTimer = 0;
+    }
+    starTimer++;
+    if (starTimer > 160) {
+      spawnStar();
+      starTimer = 0;
+    }
+
+    for (let i = asteroids.length - 1; i >= 0; i--) {
+      const a = asteroids[i];
+      a.x += a.vx;
+      a.y += a.vy;
+      a.rot += a.vrot;
+
+      const dist = Math.hypot(ship.x - a.x, ship.y - a.y);
+      if (dist < ship.r + a.r * 0.8) {
+        createExplosion(ship.x, ship.y, '#A855F7');
+        gameOver();
+        return;
+      }
+
+      if (a.y > ah + 40) asteroids.splice(i, 1);
+    }
+
+    for (let i = energyStars.length - 1; i >= 0; i--) {
+      const s = energyStars[i];
+      s.y += s.vy;
+
+      const dist = Math.hypot(ship.x - s.x, ship.y - s.y);
+      if (dist < ship.r + s.r) {
+        score += 50;
+        createExplosion(s.x, s.y, '#4FE0FF');
+        energyStars.splice(i, 1);
+        continue;
+      }
+
+      if (s.y > ah + 40) energyStars.splice(i, 1);
+    }
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life -= 0.025;
+      if (p.life <= 0) particles.splice(i, 1);
+    }
+
+    score += 0.12;
+    scoreEl.textContent = Math.round(score);
+
+    aCtx.clearRect(0, 0, aw, ah);
+    aCtx.fillStyle = '#020306';
+    aCtx.fillRect(0, 0, aw, ah);
+
+    energyStars.forEach(s => {
+      aCtx.beginPath();
+      aCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      aCtx.fillStyle = '#4FE0FF';
+      aCtx.shadowColor = '#4FE0FF';
+      aCtx.shadowBlur = 15;
+      aCtx.fill();
+      aCtx.shadowBlur = 0;
+    });
+
+    asteroids.forEach(a => {
+      aCtx.save();
+      aCtx.translate(a.x, a.y);
+      aCtx.rotate(a.rot);
+      aCtx.beginPath();
+      aCtx.arc(0, 0, a.r, 0, Math.PI * 2);
+      aCtx.fillStyle = '#0D1328';
+      aCtx.strokeStyle = 'rgba(168, 85, 247, 0.5)';
+      aCtx.lineWidth = 1.5;
+      aCtx.fill();
+      aCtx.stroke();
+      aCtx.restore();
+    });
+
+    particles.forEach(p => {
+      aCtx.beginPath();
+      aCtx.arc(p.x, p.y, 2.2, 0, Math.PI * 2);
+      aCtx.fillStyle = p.color;
+      aCtx.globalAlpha = Math.max(0, p.life);
+      aCtx.fill();
+      aCtx.globalAlpha = 1;
+    });
+
+    aCtx.save();
+    aCtx.translate(ship.x, ship.y);
+    aCtx.beginPath();
+    aCtx.moveTo(0, -15);
+    aCtx.lineTo(11, 11);
+    aCtx.lineTo(0, 6);
+    aCtx.lineTo(-11, 11);
+    aCtx.closePath();
+    aCtx.fillStyle = '#FBFDFF';
+    aCtx.shadowColor = '#4FE0FF';
+    aCtx.shadowBlur = 18;
+    aCtx.fill();
+    aCtx.restore();
+
+    requestAnimationFrame(arcadeLoop);
+  }
+
+  startBtn.addEventListener('click', () => {
+    resetGame();
+    running = true;
+    overlay.classList.add('is-hidden');
+    requestAnimationFrame(arcadeLoop);
+  });
+
+  /* ============================================================
+     7. EMAIL COPY TO CLIPBOARD
+     ============================================================ */
+  const copyBtn = document.getElementById('copyEmailBtn');
+  const copyBadge = document.getElementById('copyBadge');
+  if (copyBtn && copyBadge) {
+    copyBtn.addEventListener('click', () => {
+      playCalmChimeSound();
+      navigator.clipboard.writeText('pkmail2005@gmail.com').then(() => {
+        copyBadge.classList.add('visible');
+        setTimeout(() => {
+          copyBadge.classList.remove('visible');
+        }, 2500);
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
